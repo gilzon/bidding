@@ -1,0 +1,480 @@
+@import url(https://fonts.googleapis.com/css?family=League+Spartan:wght@200;300;400;500;600;700&display=swap);
+@import "./custom.scss";
+:root {
+  --primary: #00a97f;
+  --light: rgba(133, 198, 218, 255);
+  --dark: rgba(13, 13, 10, 255);
+  --darker: rgba(234, 157, 90, 255);
+  --lighter: #cbd6cf;
+  --lighter1: #c3dacc86;
+  --lighter2: #e4f0e9da;
+  --darken: #cca27e;
+  --color: orangered;
+  --search: #ff6000;
+  --primary1: #2b3d4c;
+  --primary2: #354d61;
+  
+}
+
+
+#root .login-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Login starts */
+.admin-login{
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto; 
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.admin-login body{
+  background: #76b852; /* fallback for old browsers */
+  background: rgb(141, 194, 111);
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+ margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  margin-top: 15rem;
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #bbccbb;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+   background: #4caf50; 
+ 
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: #43a047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4caf50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before,
+.container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #ef3b3a;
+}
+.login-page body {
+  background: #76b852; /* fallback for old browsers */
+  background: rgb(141, 194, 111);
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* Login ends */
+/* signup starts */
+.signup{
+  margin-top: 15rem;
+  width: 40rem;
+  
+}
+.card {
+  padding: 1 rem;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+.card input[type="text"],
+.card input[type="mobile"], .card input[type="email"],
+.card input[type="password"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  height: 30px;
+  border: 1px solid grey;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 1rem; /* Increase the margin for more spacing */
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px; /* Increase the font size for better readability */
+  
+}
+.signup-form button{
+  
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+     background: #4caf50; 
+   
+    width: 60%;
+    border: 0;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  .signup-form button:hover,
+  .signup-form button:active,
+  .signup-form button:focus {
+    background: #43a047;
+  }
+  .signup-form .message a {
+    color: #4caf50;
+    text-decoration: none;
+  margin-top: 20px;
+  }
+/* header starts */
+
+.nametag {
+  font-size: x-large;
+}
+.header-top {
+  background-color:#fff;
+  width: 100%;
+  height: 3.77rem;
+}
+.user-pro {
+  float: right;
+ 
+  font-size: 16px;
+  color: var(--primary2);
+  margin-top: -30px;
+}
+.profile-icon{
+  color: #f4f6f9;
+  float: right;
+  margin-left: 56rem;
+  margin-top:.5rem;
+  
+}
+.profile-icon:hover{
+  color:var(--primary1);
+  font-size: large;
+  transition: 0.1s ease;
+}
+.setting-icon{
+  margin-top:2rem;
+  margin-left: -4rem;
+ color: #4d4d4d;
+}
+.setting-icon:hover{
+  color: #1a1a1a;
+  font-size: large;
+  transition: 0.1s ease;
+  
+ 
+}
+/* header ends */
+
+/* footer starts */
+.footer {
+position: fixed;
+  height: 2.9rem;
+  width: 100%;
+  background-color:#fff;
+  margin-top: 5.5rem;
+   bottom: 0;
+}
+/* footer ends */
+
+
+/* sidebar starts */
+
+.active {
+  color:var(--primary); /* Set your desired styles for the active link */
+}
+
+.sidebar.collapsed {
+  /* Adjust the width of the collapsed sidebar if necessary */
+  width: 4rem;
+}
+
+.sidebar.collapsed .nav-link {
+  /* Hide the text of the nav links in the collapsed sidebar */
+  justify-content: center;
+}
+
+.sidebar.collapsed .nav-link span {
+  /* Hide the text of the nav links in the collapsed sidebar */
+  display: none;
+}
+.sidebar.collapsed .head span {
+  /* Hide the text of the nav links in the collapsed sidebar */
+  display: none;
+}
+body .nav-pills .nav-link.active {
+  background-color: var(--primary);
+}
+.sidebar.collapsed .nav-link i {
+  /* Increase the size of the icons in the collapsed sidebar */
+  font-size: 1.6rem;
+  
+}
+.nav-pills.collapsed .nav-link:hover {
+  /* Increase the size of the icons in the collapsed sidebar */
+  
+  width: 3rem;
+  overflow: hidden;
+}
+
+.nav-pills.collapsed .nav-link{
+  width: 3rem;
+  margin-left: -1rem;
+  font-size: x-small;
+}
+
+.sidebar{
+  top: 3.75rem;
+  height: 51.05rem;
+  position: fixed;
+    width:13.7rem;  
+  transition: width cubic-bezier(0.215, 0.610, 0.355, 1) ;
+   background-color:#fff;
+  
+}
+.nav{
+font-size:1rem;
+gap: 1rem;
+}
+
+
+.nav i{
+  color:#000000;
+}
+i.bi.bi-person{
+  margin-right: -2rem; 
+  color: var(--primary);
+  font-size:x-large;
+}
+.dropdown.open{
+ margin-top: 5rem;
+}
+
+
+#parentM  li a:hover{
+  background-color:var(--lighter1) ;
+ 
+
+}
+.hamburger-button {
+  width: 2rem;
+
+ float: right;
+  cursor: pointer;
+ 
+  color:var(--primary1);
+  font-size: large;
+  
+
+}
+.hamburger-button.collapsed{
+  font-size: 1.5rem;
+position: relative;
+top: -20px;
+ left: -2px;
+}
+
+
+/* wrapper starts */
+
+.page-wrapper{
+
+ 
+  max-width: 175rem; /* Take the full width of the available space */
+  margin-left: 14rem;
+   margin-top: 3.75rem;
+  height: 51.1rem;
+  background-color: #f4f6f9;
+
+}
+.card{
+  margin-right:3rem; 
+  margin-left: 3rem;
+  width:40rem;
+}
+/* Your default styles for the page wrapper */
+.page-wrapper {
+  transition: width 0.3s; /* Add a smooth transition effect */
+  /* Other styles for your page wrapper */
+}
+
+/* Adjust the page wrapper width when the sidebar is collapsed */
+.sidebar.collapsed + .page-wrapper {
+  margin-left: 4rem; /* Adjust this value to match the width of your collapsed sidebar */
+}
+.page-wrapper {
+  max-height: calc(100vh - 3.75rem); /* Adjust the margin-top as needed */
+  overflow: auto; /* Add scroll if content overflows */
+}
+/* wrapper ends */
+html, body {
+ overflow: hidden;
+
+}
+/*collapse starts*/
+@media screen and (min-width: 768px) {
+  .navCollapse{
+    width: 150px;
+  }
+  .navCollapse .nav-option h3{
+    display: none; 
+  }
+  .navCollapse.nav-option i.bi {
+     padding: 28px; 
+    
+  }
+  .smallDeviceIcon{
+display: none;
+  }
+
+  .parentM{
+    margin-left: -15px;
+  }
+}
+@media screen and (max-width:767px) {
+  .largeDeviceIcon{
+    display:none;
+    
+  }
+  .sidebar{
+    display: none;
+  }
+  .smallDeviceIcon{
+    display: none;
+  }
+  .navCollapse .dropdown-toggle-text-black .fs-5 {
+    display: none !important;
+  }
+}
+
+/*collapse ends*/
+/*Adress starts*/
+.address-button{
+  color:var(--primary);
+  font-size:xx-large;
+margin-right: 90rem;
+}
+.card.address{
+  width: 60rem;
+  }
+  .card.gst{
+    width: 60rem;
+    }
+  .gst-button{
+    color:var(--primary);
+    font-size:xx-large;
+     margin-right: 90rem;
+  }
+/*adress ends*/

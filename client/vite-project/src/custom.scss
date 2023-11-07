@@ -1,0 +1,17 @@
+// Import the Bootstrap source files
+$dropdown-color:#e4f0e9da;
+$nav-link-color: #e4f0e9da;
+
+
+// Override the default sidepanel
+
+  // Change the background color of the sidebar
+// .sidebar {
+//     background-color:#c3dacc86; // Change this to your desired color
+//   }
+  .nav-link{
+      $nav-pills-link-active-bg: green;
+  }
+  // Rebuild the styles with the new variables
+   //@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
