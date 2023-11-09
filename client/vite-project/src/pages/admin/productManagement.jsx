@@ -1,21 +1,30 @@
 
 
-import React, { useState , useEffect } from "react";
-// import { Form, Button, Modal, Row, Col, Card } from "react-bootstrap";
-import { Button, Table } from "react-bootstrap"
+
+import React, { useState, useEffect } from "react";
+import { Form, Button, Modal, Table } from 'react-bootstrap';
 import axios from "axios";
+import { Link } from"react-router-dom";
+
+import { AdvancedImage } from'@cloudinary/react';
+import { Cloudinary } from'@cloudinary/url-gen';
+import { fill } from'@cloudinary/url-gen/actions/resize';
 
 const ProductManage = () => {
   const [show, setShow] = useState(false);
   const [products, setProducts] = useState([]);
   const handleClose = () => setShow(false);
-  const handleShow = () => {
-    console.log('Handle Show Clicked'); // Add this line for debugging
-    setShow(true);
-  };
-  
+  const handleShow = () => setShow(true);
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dnxdktspd',
+    },
+  });
+
   const [formData, setFormData] = useState({
     lotNumber: "",
+    productImage: null,
     description: "",
     lotType: "",
     subType: "",
@@ -37,87 +46,75 @@ const ProductManage = () => {
     });
   };
 
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0]; // Get the selected image file
-
-  //   if (file) {
-  //     // You can perform additional validation here, e.g., file type, size, etc.
-
-  //     // Read the selected image file as a data URL
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       const imageDataURL = e.target.result;
-
-  //       // Update your component state with the selected image data URL
-  //       setFormData({ ...formData, image: imageDataURL });
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, productImage: file });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // Make a POST request to the server to add the product
-      const response = await axios.post('http://localhost:5000/products', formData);
+    // Create a FormData object
+    const data = new FormData();
 
-      if (response.status === 201) {
-        // Product added successfully
-        // You can handle the success case here, e.g., display a success message
-        console.log('Product added successfully');
-       
-        setProducts([...products, response.data]);
+    // Add the image file to the FormData object
+    data.append("productImage", formData.productImage);
 
-        // Optionally, you can clear the form fields or close the modal
-        setFormData({
-          lotNumber: "",
-          description: "",
-          lotType: "",
-          subType: "",
-          literWeight: "",
-          netWeight: "",
-          sampleWeight: "",
-          color: "",
-          moistureContent: "",
-          cleanLot: "",
-          quotePrice: "",
-          seller: "",
-        });
-        handleClose(); // Close the modal
-      } else {
-        // Handle other status codes as needed
+    // Add the rest of the form data to the FormData object
+    for (const key in formData) {
+      if (key !== "productImage") {
+        data.append(key, formData[key]);
       }
-    } catch (error) {
-      // Handle errors, such as displaying an error message
-      console.error('Error adding product:', error);
     }
-  
+
+    // Make a POST request to the server
+    const response = await axios.post("http://localhost:5000/products", data);
+
+    // Handle the response...
+    if (response.status === 201) {
+      // Product added successfully
+      console.log("Product added successfully");
+
+      setProducts([...products, response.data]);
+
+      // Optionally, you can clear the form fields or close the modal
+      setFormData({
+        lotNumber: "",
+        productImage: null,
+        description: "",
+        lotType: "",
+        subType: "",
+        literWeight: "",
+        netWeight: "",
+        sampleWeight: "",
+        color: "",
+        moistureContent: "",
+        cleanLot: "",
+        quotePrice: "",
+        seller: "",
+      });
+      handleClose();
+    } else {
+      // Handle other status codes as needed
+    }
   };
+
   useEffect(() => {
     // Fetch the list of products from your server when the component mounts
-    // Update the 'products' state with the fetched data
     const fetchData = async () => {
       try {
-        const result = await axios.get('http://localhost:5000/products');
-         console.log(result.data)
+        const result = await axios.get("http://localhost:5000/products");
         setProducts(result.data);
-       
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error("Error fetching products:", error);
       }
     };
     fetchData();
-  }, []);
+  }, []);   
 
-  
 
   return (
-    <div>
-      <Button variant="primary" onClick={handleShow}>
-        Add Product
-      </Button>
-
+    <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Product</Modal.Title>
@@ -134,15 +131,16 @@ const ProductManage = () => {
               />
             </Form.Group>
 
-            {/* <Form.Group controlId="image">
+            <Form.Group controlId="productImage">
               <Form.Label>Image</Form.Label>
-              <Form.File
+              <Form.Control
                 type="file"
-                name="image"
-                accept="image/*"
+                name="productImage"
                 onChange={handleImageChange}
               />
-            </Form.Group> */}
+            </Form.Group>
+
+
 
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
@@ -253,6 +251,7 @@ const ProductManage = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+          
 
             <Button variant="primary" type="submit">
               Save
@@ -261,54 +260,71 @@ const ProductManage = () => {
         </Modal.Body>
       </Modal>
 
- 
+      <div className="w-100 rounded bg-white border shadow p-4 ">
+        <div className="container-fluid ">
+          <div>
+            <div className="justify-content-between align-items-center">
+              <h2>Item List</h2>
 
-<div className="d-flex flex-column justify-content-center align-items-center bg-light vh-100">
-<h2>Item List</h2>
-<div className="w-75 rounded bg-white border shadow p-4">
-<table>
-  <thead>
-    <tr>
-      <th>lotNumber</th>
-      <th>description</th>
-      <th>lotType</th>
-      <th>subType</th>
-      <th>literWeight</th>
-      <th>netWeight</th>
-      <th>sampleWeight</th>
-      <th>color</th>
-      <th>moistureContent</th>
-      <th>cleanLot</th>
-      <th>quotePrice</th>
-      <th>seller</th>
-    </tr>
-  </thead>
-  <tbody>{
-    products.map((product,index)=>(
-<tr key={index}>
- <td>{products.lotNumber}</td>
- <td>{products.description}</td>
- <td>{products.lotType}</td>
- <td>{products.subType}</td>
- <td>{products.literWeight}</td>
- <td>{products.netWeight}</td>
- <td>{products.sampleWeight}</td>
- <td>{products.color}</td>
- <td>{products.moistureContent}</td>
- <td>{products.cleanLot}</td>
- <td>{products.quotePrice}</td>
- <td>{products.seller}</td>
-<td>
-  <Button onClick={()=>{deleteProduct(product._id)}} variant='danger'>Delete</Button>
-  <Button onClick={()=>{updateProduct(product._id)}} variant='primary'>edit</Button>
+              <button className="addItem-Button" onClick={handleShow}>
+                Add Item
+              </button>
+            </div>
+          </div>
+        </div>
+        <Table responsive bordered hover>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>LotNumber</th>
+             
+              <th>LotType</th>
+           
+              <th>LiterWeight</th>
+              <th>NetWeight</th>
+            
+              <th>Color</th>
+           
+              <th>CleanLot</th>
+              <th>QuotePrice</th>
+              <th>Seller</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product, index) => (
+              <tr key={index}>
+                <td>
+                <img src={product.imageUrl} alt="Product" style={{width:'80px' , height:'50px'}} />
+              </td>
+                <td>{product.lotNumber}</td>
+                <td>{product.description}</td>
+                <td>{product.lotType}</td>
+                <td>{product.subType}</td>
+                <td>{product.literWeight}</td>
+                <td>{product.netWeight}</td>
+                <td>{product.sampleWeight}</td>
+                <td>{product.color}</td>
+                <td>{product.moistureContent}</td>
+                <td>{product.cleanLot}</td>
+                <td>{product.quotePrice}</td>
+                <td>{product.seller}</td>
+                <td>
+                 <Link to={`${product._id}/view`}> <button className="btn btn-sm btn-info me-2 " >view</button></Link>
+                  <button className="btn btn-sm btn-secondary me-2 ">
+                    edit
+                  </button>
+                  <button className="btn btn-sm btn-danger me-2 ">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    </>
+  );
+};
 
-</td>
-</tr>
-    )
- )
-}</tbody>
-</table>
-</div>
-</div>
-   
 export default ProductManage;

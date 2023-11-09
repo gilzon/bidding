@@ -478,3 +478,19 @@ margin-right: 90rem;
      margin-right: 90rem;
   }
 /*adress ends*/
+/* productmanagement starts*/
+.addItem-Button {
+background-color: #00a97f;
+color: #ffffff;
+margin-left: 90rem;
+border-radius: 4px;
+padding: 2px 30px;
+border: #00a97f;
+margin-bottom: 10px;
+cursor: pointer;
+
+
+}
+
+
+/* productmanagement ends*/

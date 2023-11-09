@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+
 const productSchema = new Schema({
   lotNumber: Number,
   description: String,
@@ -11,9 +13,12 @@ const productSchema = new Schema({
   sampleWeight: Number,
   color: String,
   moistureContent: Number,
-  cleanLot: Boolean, // Change the data type to Boolean
+  cleanLot: String, // Change the data type to Boolean
   quotePrice: Number,
   seller: String,
+  imageUrl: String,
+ 
 });
+
 
 module.exports = mongoose.model('Product', productSchema);

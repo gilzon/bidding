@@ -11,6 +11,7 @@ import AdminLogin from "./pages/admin/adminLogin";
 import AdminPanel from "./pages/admin/adminPanel";
 import AdminLayout from "./components/adminLayout";
 import ProductManage from "./pages/admin/productManagement";
+import View from "./pages/admin/view";
 //user routes
 import Home from "./pages/home";
 import Dashboard from "./pages/user/dashboard";
@@ -38,6 +39,7 @@ import ProductList from "./pages/buyer/productlist";
 import MyBiddings from "./pages/buyer/mybiddings";
 import BuyerGst from "./pages/buyer/buyergst";
 import BuyerSupport from "./pages/buyer/buyersupport";
+
 
 function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,11 +83,14 @@ function App() {
 
         <Route path="/" element={<AdminLayout />}>
           <Route path="adminpanel" element={<AdminPanel />} />
-          <Route path="productmanage" element={<ProductManage />} />
+          <Route path="productmanage" element={<ProductManage />} />  
+          <Route path="productmanage/:id/view" element={<View />} />  
+         
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="adminlogin" element={<AdminLogin />} />
+      
 
         <Route path="buyerlogin" element={<BuyerLogin />} />
       </Routes>

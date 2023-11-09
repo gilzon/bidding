@@ -1,18 +1,28 @@
+
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// Import the Product model
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 const Product = require('./models/products')
-const app = express();
-const PORT = process.env.PORT || 5000; // Define the port you want your server to run on
 
-// Enable CORS for all routes
+const app = express();
+const PORT = process.env.PORT || 5000;
+
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-// Connect to your MongoDB database
 mongoose.connect('mongodb://localhost:27017/bidding', {
   
+});
+
+cloudinary.config({
+  cloud_name: 'dnxdktspd',
+  api_key: '814445123213543',
+  api_secret: 'k042NnF8yrP9dMDMYY6lLdl4VGo',
 });
 
 const db = mongoose.connection;
@@ -21,28 +31,40 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'bidding',
+    format: async (req, file) => 'png',
+    public_id: (req, file) => file.originalname,
+  },
+});
 
-// Define your API routes here
-
-const productsRoute = require('./routes/products'); // Import the route you created
-
-
-// Use the routes
+const parser = multer({ storage: storage });
+const productsRoute = require('./routes/products');
 
 app.use('/products',productsRoute)
-
-app.post('/products',async (req,res)=>{
-  console.log(req.body)
+app.post('/products', parser.single('productImage'), async (req, res) => {
   const newProduct = new Product(req.body);
-  const savedProduct  = await newProduct.save();
+  console.log(req.body)
+  newProduct.imageUrl = req.file.path;
+  const savedProduct = await newProduct.save();
+
   res.status(201).json(savedProduct);
+});
 
+app.get('/products/:id',async (req,res)=>{
+  const productId  = req.params.id;
+  const productData = await Product.findById(productId);
+  if(productData){
+    res.json(productData)
+  }else{
+    res.status(404).json({ error: 'Product not found' }); 
+  }
 })
-
-
-// Use other routes as needed
-// Example: app.get('/api/products', (req, res) => { /* Your logic here */ });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
